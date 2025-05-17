@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "description": "ai question generator",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "author": "ayush kumar",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^0.14.1",
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0"
+  }
 }
