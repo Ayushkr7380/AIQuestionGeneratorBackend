@@ -7,15 +7,20 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export const askquestion = async (req, res) => {
   try {
-    const { subjectName, standard, numberOfQuestions } = req.body;
-    if (!subjectName || !standard || !numberOfQuestions) {
+    let { typeOfQuestion
+ , subjectName, standard, numberOfQuestions } = req.body;
+    if (!typeOfQuestion || !subjectName || !standard || !numberOfQuestions) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
       });
     }
 
-    const prompt = `Generate ${numberOfQuestions} questions for class ${standard} on ${subjectName}.
+    if(typeOfQuestion === "MCQ"){
+      typeOfQuestion = "MCQ with 4 options"
+    }
+
+    const prompt = `Generate ${numberOfQuestions} ${typeOfQuestion}questions for  ${standard} class on ${subjectName}.
 Return the questions in JSON format as an array of objects, where each object has "questionNumber" and "questionText" fields. Respond with JSON format only.`;
 
     const response = await ai.models.generateContent({
